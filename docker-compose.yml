@@ -1,0 +1,60 @@
+version: '3.0'
+
+services:
+  react_frontend:
+    build: front-end
+    container_name: smol-react
+    volumes:
+      - react_vol:/var/www/html
+    networks:
+      - smol-drops-network
+    depends_on:
+      - express_api
+
+  nginx:
+    build: nginx
+    container_name: smol-nginx
+    ports:
+      - 80:80
+    volumes:
+      - react_vol:/var/www/html
+    depends_on:
+      - react_frontend
+    networks:
+      - smol-drops-network
+
+  express_api:
+    build: back-end
+    container_name: smol-api
+    env_file:
+      - back-end/.env
+    ports:
+      - 5000:5000
+    volumes:
+      - psql-db-drops:/var/lib/postgresql/data/
+    networks:
+      - smol-drops-network
+    depends_on:
+      - psql_database
+
+  
+  psql_database:
+    image: postgres:14
+    container_name: smol-drops-db
+    restart: always
+    ports:
+      - 2345:5432
+    env_file:
+      - back-end/.env
+    volumes:
+      - psql-db-drops:/var/lib/postgresql/data/
+    networks:
+      - smol-drops-network
+
+volumes:
+  react_vol:
+  psql-db-drops:
+
+networks:
+  smol-drops-network:
+    driver: bridge
