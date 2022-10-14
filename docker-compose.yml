@@ -4,24 +4,12 @@ services:
   react_frontend:
     build: front-end
     container_name: smol-react
-    volumes:
-      - react_vol:/var/www/html
     networks:
       - smol-drops-network
+    volumes:
+      - react_vol:/var/www/html
     depends_on:
       - express_api
-
-  nginx:
-    build: nginx
-    container_name: smol-nginx
-    ports:
-      - 80:80
-    volumes:
-      - react_vol:/var/www/html
-    depends_on:
-      - react_frontend
-    networks:
-      - smol-drops-network
 
   express_api:
     build: back-end
@@ -36,7 +24,6 @@ services:
       - smol-drops-network
     depends_on:
       - psql_database
-
   
   psql_database:
     image: postgres:14
@@ -50,6 +37,20 @@ services:
       - psql-db-drops:/var/lib/postgresql/data/
     networks:
       - smol-drops-network
+
+  nginx:
+    build: nginx
+    container_name: smol-nginx
+    ports:
+      - 80:80
+    networks:
+      - smol-drops-network
+    volumes:
+      - react_vol:/var/www/html
+    depends_on:
+      - react_frontend
+      - express_api
+      - psql_database
 
 volumes:
   react_vol:
