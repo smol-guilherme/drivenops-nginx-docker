@@ -18,6 +18,4 @@ jobs:
       - name: Run tests
         run: docker-compose -f docker-compose-test.yml run express_api_tests npm run test
       - name: Build
-        path:
-          - back-end
         run: npm i && npm run build
