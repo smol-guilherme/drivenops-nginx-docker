@@ -14,10 +14,10 @@ jobs:
           envkey_POSTGRES_PASSWORD: "postgres"
           envkey_POSTGRES_DB: "test"
           envkey_DATABASE_URL: "postgres://postgres:postgres@smol-drops-db:5432/test"
-          file_name: .env.test
+          file_name: back-end/.env.test
       - name: Run tests
         run: docker-compose -f docker-compose-test.yml run express_api_tests npm run test
-        paths:
-          - ./back-end
       - name: Build
+        path:
+          - back-end
         run: npm i && npm run build
