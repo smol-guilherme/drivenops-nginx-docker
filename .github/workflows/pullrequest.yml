@@ -16,6 +16,8 @@ jobs:
           envkey_DATABASE_URL: "postgres://postgres:postgres@smol-drops-db:5432/test"
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f docker-compose-test.yml run express_api_tests cd back-end && npm run test
+        run: docker-compose -f docker-compose-test.yml run express_api_tests npm run test
+        paths:
+          - ./back-end
       - name: Build
         run: npm i && npm run build
