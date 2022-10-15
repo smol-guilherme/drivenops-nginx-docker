@@ -11,7 +11,7 @@ services:
     depends_on:
       - express_api
 
-  express_api:
+  express_api_tests:
     build: back-end
     container_name: smol-api
     env_file:
