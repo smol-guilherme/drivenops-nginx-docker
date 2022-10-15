@@ -9,7 +9,7 @@ services:
     volumes:
       - react_vol:/var/www/html
     depends_on:
-      - express_api
+      - express_api_tests
 
   express_api_tests:
     build: back-end
@@ -49,7 +49,7 @@ services:
       - react_vol:/var/www/html
     depends_on:
       - react_frontend
-      - express_api
+      - express_api_tests
       - psql_database
 
 volumes:
