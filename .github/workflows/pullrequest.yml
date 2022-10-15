@@ -18,4 +18,4 @@ jobs:
       - name: Run tests
         run: docker-compose -f docker-compose-test.yml run express_api_tests npm run test
       - name: Build
-        run: npm i && npm run build
+        run: npm i --prefix back-end && npm run build --prefix back-end
