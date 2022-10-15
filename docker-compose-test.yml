@@ -32,7 +32,7 @@ services:
     ports:
       - 2345:5432
     env_file:
-      - back-end/.env
+      - .env.test
     volumes:
       - psql-db-drops:/var/lib/postgresql/data/
     networks:
