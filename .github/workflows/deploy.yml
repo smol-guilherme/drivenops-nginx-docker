@@ -14,20 +14,17 @@ jobs:
       - name: Create api env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_DEBUG: false
-          envkey_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          envkey_POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          envkey_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          envkey_POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+          envkey_POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          envkey_POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          envkey_DATABASE_URL: ${{secrets.DATABASE_URL}}
           directory: back-end/
-          file_name: .env
           fail_on_empty: true
       - name: Create react env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
           directory: front-end/
-          file_name: .env
           fail_on_empty: true
       - name: Build docker container
         run: sudo docker-compose build
