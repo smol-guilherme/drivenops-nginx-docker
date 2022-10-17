@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create api env file
-        uses: SpicyPizza/create-envfile@v1.3
+        uses: SpicyPizza/create-envfile@v1.3.1
         with:
           envkey_POSTGRES_DB: ${{secrets.POSTGRES_DB}}
           envkey_POSTGRES_USER: ${{secrets.POSTGRES_USER}}
@@ -21,7 +21,7 @@ jobs:
           directory: back-end/
           fail_on_empty: true
       - name: Create react env file
-        uses: SpicyPizza/create-envfile@v1.3
+        uses: SpicyPizza/create-envfile@v1.3.1
         with:
           envkey_REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
           directory: front-end/
